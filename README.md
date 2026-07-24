@@ -6,3 +6,13 @@ This project is a web-based dashboard built for WEB -115 to demonstrate intercti
 - [ ] Integrate a task list with Array storage.
 - [ ] Add JavaScript logic for a live clock.
 
+Here is a simple flow chart:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
