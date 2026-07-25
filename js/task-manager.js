@@ -28,6 +28,7 @@
 
     // Add EventListener to btn
     btn.addEventListener("click", function () {
+        event.preventDefault(); // Prevent form submission
         let userName = document.getElementById("userName").value;
         let dailyGoal = parseInt(document.getElementById("dailyGoal").value);
         let bonusTasks = parseInt(document.getElementById("bonusTasks").value);
