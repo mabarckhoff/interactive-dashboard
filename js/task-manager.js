@@ -23,3 +23,13 @@
         let output = "User: " + userName + ", Total Weekly Goal: " + totalGoal);
         document.getElementById("goal-message").innerHTML = output;
     }
+
+    const btn = document.getElementById("submit-btn");
+
+    // Add EventListener to btn
+    btn.addEventListener("click", function () {
+        let userName = document.getElementById("userName").value;
+        let dailyGoal = parseInt(document.getElementById("dailyGoal").value);
+        let bonusTasks = parseInt(document.getElementById("bonusTasks").value);
+        weeklyGoal(userName, dailyGoal, bonusTasks);
+    });
