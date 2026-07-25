@@ -3,23 +3,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Web Page</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- JavaScript-->
     <!-- Bootstrap  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
      <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-</head>
+    <!-- JavaScript-->
+     <script defer src="js/script.js"></script>
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    </head>
 <body>
     <header>
         <h1>My Interactive Dashboard</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#section1">Section 1</a></li>
-            <li><a href="#section2">Section 2</a></li>  
-        </ul>       
-    </nav>
+    
     <main>
         <p> This dashboard was created by Mary Anne Barckhoff for the WEB-115 course at Wake Tech.</p>
         <script>
@@ -29,28 +27,93 @@
         <noscript>
             Unfortunately, your web browser does not support JavaScript.
         </noscript>
-        
-        <!-- Weekly Tasks -->
-        <div class="grid">
-            <div class="g-col-6" id="weekly-tasks">
-                <script src="js/task-manager.js"></script>
-                <form>
-                    <input type="text" id="userName" placeholder="Enter your name">
-                    <input type="number" id="dailyGoal" placeholder="Enter your daily goal">
-                    <input type="number" id="bonusTasks" placeholder="Enter weekly bonus tasks">
-                    <button id="submit-btn">Submit</button>
-                </form>
-                <p id="goal-message"></p>
-            </div>
-            <!-- End Weekly Tasks -->
+        <br>
+        <hr>
+        <div class="container">
+            <!-- Dashboard Content -->
+            <div class="row">
+                <!-- Weekly Tasks -->
+                
+                <div class="col" id="weekly-tasks">
+                    <script defer src="js/task-manager.js"></script>
+                    <h2>Weekly Tasks </h2>
+                    <form>
+                        <input type="text" id="userName" placeholder="Enter your name">
+                        <input type="number" id="dailyGoal" placeholder="Enter your daily goal">
+                        <input type="number" id="bonusTasks" placeholder="Enter weekly bonus tasks">
+                        <button id="goal-btn">Submit Goal</button>
+                    </form>
+                    <p id="goal-message"></p>
+                    <hr>
+                    <h3>Weekly Task List</h3>
 
+                    <p>Enter a task below to manage your goals.</p>
+
+                    <form id="task-form">
+                        <label for="task-value">Enter task:</label>
+                        <input type="text" id="task-value" name="task-value">
+
+                        <button type="button" id="add-task">Add Task</button>
+                        <button type="button" id="clear-list">Clear List</button>
+                    </form>
+                    <div id="task-list"></div>
+
+                </div>
+                <!-- End Weekly Tasks -->
+
+                <!-- Metric converter -->
+                <div class="col" id="metric-converter">
+                    <h2>Metric Converter</h2>
+                    <script defer src="js/metric-converter.js"></script>
+                    <form>
+                        <label for="numeric-value">Enter a number:</label>
+                        <input type="number" id="numeric-value" name="numeric-value">
+                        <select id="conversion-type">
+                            <option value="inch_to_cent">Inches to Centimeters</option>
+                            <option value="foot_to_cent">Feet to Centimeters</option>
+                            <option value="yard_to_meter">Yards to Meters</option>
+                            <option value="mile_to_km">Miles to Kilometers</option>
+                            <option value="cent_to_inch">Centimeters to Inches</option>
+                            <option value="cent_to_foot">Centimeters to Feet</option>
+                            <option value="meter_to_yard">Meters to Yards</option>
+                            <option value="km_to_mile">Kilometers to Miles</option>
+                        </select>
+                        <button id="convert-btn">Convert</button>
+                    </form>
+                    <p id="conversion-result"></p>
+                </div>
+                <!-- End Metric converter -->
+
+                <!-- Magic 8 Ball -->
+                  <di class="col" id="magic-eight-ball">
+                    <script src="js/magic-eight-ball.js" defer></script>
+                    <link rel="stylesheet" href="css/magic-eight-ball.css">
+                    
+                    <h2>Magic Eight Ball</h2>
+                    <form>
+                    <p>Type a yes/no question below, then click on the Eight Ball below to get your answer!</p>
+                    <input id="question" name="question" size="20">
+                    <div id="magicEightBall">
+                    <div id="circle"></div>
+                    <img id="ball" src="img/magic-eight-ball.png"/>
+                    </div>
+                    <button id="reset" name="reset" type="reset">Ask another question</button>
+                    <button id="addResponse" name="addResponse" type="button">Add a new 8-ball response</button>
+                </form>
+                    <br>
+                </div>
+
+            </div>
         </div>
     </main>
+     <hr>
     <footer>
         <p>&copy; 2026 Mary Anne Barckhoff</p>      
     </footer>
 
-    
+
 
 </body>
 </html>
+
+            
