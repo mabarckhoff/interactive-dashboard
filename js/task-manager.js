@@ -26,85 +26,136 @@
         weeklyGoal(userName, dailyGoal, bonusTasks);
     });
 
- // Task List Manager
-  
-// Global array to store tasks
-let myTasks = [];
+  // ======================================
+    // Task List Manager
+    // ======================================
+    
+    // Global array to store tasks
+    let myTasks = [];
 
-// ======================================
-// Create the unordered list dynamically
-// ======================================
+    // ======================================
+    // Reference existing page elements
+    // ======================================
 
-// Reference the existing task-list div
-const taskListDiv = document.getElementById("task-list");
+    const nameInput = document.getElementById("task-name");
+    const priorityInput = document.getElementById("task-priority");
+    const importantInput = document.getElementById("task-important");
 
-// Create the unordered list
-const taskList = document.createElement("ul");
+    console.log(nameInput.value);
+ 
+    // Buttons
+    const addButton = document.getElementById("add-task");
+    const deleteButton = document.getElementById("delete-list");
 
-// Give the list an ID
-taskList.id = "user-tasks";
+    // Event listensers
+    addButton.addEventListener("click", function () {
+        addTask();
+         // Console logging
+        console.log(JSON.stringify(myTasks));
+    });
+    deleteButton.addEventListener("click", function () {
+        deleteList();
+        
+        // Console logging
+        console.log(JSON.stringify(myTasks));
+    });
+   
 
-// Append the list to the task-list div
-taskListDiv.appendChild(taskList);
+    // ======================================
+    // Create the unordered list dynamically
+    // ======================================
 
-// ======================================
-// Reference existing page elements
-// ======================================
+    // Reference the existing task-list div
+    const taskListDiv = document.getElementById("task-list");
 
-const input = document.getElementById("task-value");
-const addButton = document.getElementById("add-task");
-const clearButton = document.getElementById("clear-list");
+    // Create the unordered list
+    const taskList = document.createElement("ul");
 
-// ======================================
-// Add Task Button
-// ======================================
+    // Give the list an ID
+    taskList.id = "user-tasks";
 
-addButton.addEventListener("click", function () {
+    // Append the list to the task-list div
+    taskListDiv.appendChild(taskList);
+   
 
-    // Get the task entered by the user
-    const task = input.value.trim();
+    // ======================================
+    // Add Task Function
+    // ======================================
 
-    if (task === "") {
-        alert("Please enter a task.");
-        return;
+
+    function addTask() {
+        // Get the task entered by the user
+        const task = {
+            id: myTasks.length + 1,
+            name: nameInput.value,
+            priority: priorityInput.value,
+            isImportant: importantInput.checked,
+            isCompleted: false,
+        };
+
+        if (task.name === "" || task.priority === "") {
+            alert("Please enter a task and priority.");
+            return;
+        }
+
+        // Store the task in the array
+        myTasks.push(task);
+
+        // Create a new list item
+        const listItem = document.createElement("li");
+        listItem.id = `task-${task.id}`;
+        listItem.textContent = `${task.name} - Priority: ${task.priority} `;
+
+        // Create the Mark Complete button
+        const completeButton = document.createElement("button");
+        completeButton.textContent = task.isCompleted 
+            ? "Undo" 
+            : "Complete";
+        
+        // Apply priority styling
+        if (task.priority === "High") {
+            listItem.style.fontWeight = "bold";
+        } 
+        else if (task.priority === "Low") {
+            listItem.style.fontStyle = "italic";
+        }
+
+        // Highlight important tasks in red
+        if (task.isImportant == true) {
+            listItem.style.backgroundColor = "red";
+            listItem.style.fontWeight = "bold";
+        }
+
+        // Mark Complete button event
+        completeButton.addEventListener("click", function () {
+            listItem.style.textDecoration = "line-through";
+            task.isCompleted = !task.isCompleted;
+        });
+
+        // Add the button to the list item
+        listItem.appendChild(completeButton);
+
+        // Add the list item to the unordered list
+        taskList.appendChild(listItem);
+        
+        // Clear form inputs
+        nameInput.value = "";
+        priorityInput.value = "";
+        importantInput.checked = false;
+    
     }
 
-    // Store the task in the array
-    myTasks.push(task);
+    // ======================================
+    // Delete List 
+    // ======================================
 
-    // Create a new list item
-    const listItem = document.createElement("li");
-    listItem.textContent = task + " ";
+    function deleteList() {
+        // Reset te array
+        myTasks = [];
 
-    // Create the Mark Complete button
-    const completeButton = document.createElement("button");
-    completeButton.textContent = "Mark Complete";
+        // Remove all list items from the page
+        taskList.innerHTML = "";
+    }
 
-    // Mark Complete button event
-    completeButton.addEventListener("click", function () {
-        listItem.style.textDecoration = "line-through";
-    });
 
-    // Add the button to the list item
-    listItem.appendChild(completeButton);
-
-    // Add the list item to the unordered list
-    taskList.appendChild(listItem);
-
-    // Clear the input field
-    input.value = "";
-    input.focus();
-});
-
-// ======================================
-// Clear List Button
-// ======================================
-
-clearButton.addEventListener("click", function () {
-
-    // Reset the array
-    myTasks = [];
-
-    // Remove all list items from the page
-    taskList.innerHTML = "";
-});
+            
